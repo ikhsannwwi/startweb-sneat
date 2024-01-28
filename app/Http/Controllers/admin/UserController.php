@@ -324,6 +324,13 @@ class UserController extends Controller
             'usergroup' => $usergroup,
         ]);
     }
+
+    public function getDataUserGroup(){
+        $data = UserGroup::query();
+
+        return DataTables::of($data)
+            ->make(true);
+    }
     
     public function generateKode(){
         $generateKode = 'sanapp-' . substr(uniqid(), -5);

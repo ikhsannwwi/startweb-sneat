@@ -75,6 +75,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('users/delete', [UserController::class, 'delete'])->name('admin.users.delete');
         Route::get('users/getDetail-{id}', [UserController::class, 'getDetail'])->name('admin.users.getDetail');
         Route::get('users/getUserGroup', [UserController::class, 'getUserGroup'])->name('admin.users.getUserGroup');
+        Route::get('users/getDataUserGroup', [UserController::class, 'getDataUserGroup'])->name('admin.users.getDataUserGroup');
         Route::post('users/changeStatus',[UserController::class, 'changeStatus'])->name('admin.users.changeStatus');
         Route::get('users/generateKode',[UserController::class, 'generateKode'])->name('admin.users.generateKode');
         Route::post('users/checkEmail',[UserController::class, 'checkEmail'])->name('admin.users.checkEmail');

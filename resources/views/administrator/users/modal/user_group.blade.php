@@ -1,16 +1,19 @@
-<div class="col-md-6 col-12 pt-3">
-    <label for="inputUser" class="form-label">User Group</label>
-    <div class="row">
-        <div class="col-8" style="padding-right: 0;">
-            <!-- Menggunakan col-8 agar input lebih lebar dan menghapus padding kanan -->
-            <input type="text" class="form-control btn-sm" id="inputUserGroupName" readonly>
-            <input type="text" class="d-none" name="user_group" id="inputUserGroupId">
-        </div>
-        <div class="col-4" style="padding-left: 0;">
-            <!-- Menggunakan col-4 agar tombol "Search" lebih kecil dan menghapus padding kiri -->
-            <a href="#" class="btn  btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#filterUserGroup">
-                Search
-            </a>
+<div class="col-md-6 col-12">
+    <div class="form-group mandatory">
+        <label for="inputUser" class="form-label">User Group</label>
+        <div class="row">
+            <div class="col-8" style="padding-right: 0;">
+                <!-- Menggunakan col-8 agar input lebih lebar dan menghapus padding kanan -->
+                <input type="text" class="form-control" value="{{Route::is('admin.users.edit*') ? ($data->user_group ? $data->user_group->name : '') : ''}}" id="inputUserGroupName" readonly>
+                <input type="text" class="d-none" value="{{Route::is('admin.users.edit*') ? ($data->user_group ? $data->user_group->id : '') : ''}}" name="user_group" id="inputUserGroupId">
+            </div>
+            <div class="col-4" style="padding-left: 0;">
+                <!-- Menggunakan col-4 agar tombol "Search" lebih kecil dan menghapus padding kiri -->
+                <a href="#" class="btn btn-secondary btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#filterUserGroup">
+                    Search
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -46,7 +49,6 @@
 
 @push('js')
     <script>
-        // Function to add 'selected' class to the row based on the user ID
         function addSelectedClassByUserGroupId(userGroupId) {
             var table = $('#datatableUserGroupModal').DataTable();
 
@@ -158,7 +160,9 @@
             });
 
             // click di tombol Pilih UserGroup
-            $('#selectData-UserGroup').off('click').on('click', function() {
+            $('#selectData-UserGroup').off('click').on('click', function(e) {
+                e.preventDefault();
+
                 // Get the selected row data
                 var selectedRowData = data_table_user.rows('.selected').data()[0];
 
@@ -167,16 +171,15 @@
                     // Use the selected row data
                     $("#inputUserGroupName").val(selectedRowData.name);
                     $("#inputUserGroupId").val(selectedRowData.id);
-                    console.log($("#inputUserGroupId").val())
 
                     // Close the modal
                     $('#buttonCloseUserGroup').click();
                 } else {
+                    $('#buttonCloseUserGroup').click();
+
                     var toasty = new Toasty(optionToast);
                     toasty.configure(optionToast);
                     toasty.error('Pilih salah satu');
-
-                    $('#buttonCloseUserGroup').click();
                 }
             });
             // end click di tombol Pilih UserGroup
