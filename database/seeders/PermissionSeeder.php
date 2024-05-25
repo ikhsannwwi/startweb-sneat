@@ -166,6 +166,20 @@ class PermissionSeeder extends Seeder
                     ],
                 ]
             ],
+            [
+                "identifiers"   => "statistic",
+                "name"          => "Track Statistic",
+                "access"        => [
+                    [
+                        "identifiers" => "view",
+                        "name"        => "View",
+                    ],
+                    [
+                        "identifiers" => "detail",
+                        "name"        => "Detail",
+                    ],
+                ]
+            ],
         ];
 
 
