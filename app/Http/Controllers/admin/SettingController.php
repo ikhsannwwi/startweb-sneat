@@ -115,44 +115,6 @@ class SettingController extends Controller
             Image::make($image->getRealPath())->save($path, 100);
             $data_settings['favicon'] = $fileName;
         }
-        // elseif ($request->has('remove_favicon')) {
-        //     if (array_key_exists("favicon", $settings) && !empty($settings["favicon"])) {
-        //         $image_path = "./administrator/assets/media/settings/" . $settings["favicon"];
-        //         if (File::exists($image_path)) {
-        //             File::delete($image_path);
-        //         }
-        //         $data_settings['favicon'] = null;
-        //     }
-        // }
-
-        if ($request->hasFile('background_login_panel_admin')) {
-            if (array_key_exists("background_login_panel_admin", $settings)) {
-                $imageBefore = $settings["background_login_panel_admin"];
-                if (!empty($settings["background_login_panel_admin"])) {
-                    $image_path = "./administrator/assets/media/settings/" . $settings["background_login_panel_admin"];
-                    if (File::exists($image_path)) {
-                        File::delete($image_path);
-                    }
-                }
-            }
-
-            $image = $request->file('background_login_panel_admin');
-            $fileName  =  'background_login_panel_admin.' . $image->getClientOriginalExtension();
-            $path = upload_path('settings') . $fileName;
-            Image::make($image->getRealPath())->save($path, 100);
-            $data_settings['background_login_panel_admin'] = $fileName;
-        }
-        // elseif ($request->has('remove_background_login_panel_admin')) {
-        //     if (array_key_exists("background_login_panel_admin", $settings) && !empty($settings["background_login_panel_admin"])) {
-        //         $image_path = "./administrator/assets/media/settings/" . $settings["background_login_panel_admin"];
-        //         if (File::exists($image_path)) {
-        //             File::delete($image_path);
-        //         }
-        //         $data_settings['background_login_panel_admin'] = null;
-        //     }
-        // }
-
-        
 
         $logs = []; // Buat array kosong untuk menyimpan log
 
@@ -173,11 +135,6 @@ class SettingController extends Controller
                 $logs[] = $set;
             }
         }
-
-        
-
-        // Setelah perulangan selesai, $logs akan berisi semua log untuk setiap data yang diproses.
-
 
         //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
@@ -215,12 +172,12 @@ class SettingController extends Controller
 
         
         $data_settings = [];
-        $data_settings["smtp_host"] = $request->host;
-        $data_settings["smtp_port"] = $request->port;
-        $data_settings["smtp_security"] = $request->security;
-        $data_settings["smtp_user"] = $request->user;
-        if (!empty($request->password)) {
-            $data_settings["smtp_password"] = $request->password;
+        $data_settings["smtp_host_admin"] = $request->smtp_host_admin;
+        $data_settings["smtp_port_admin"] = $request->smtp_port_admin;
+        $data_settings["smtp_security_admin"] = $request->smtp_security_admin;
+        $data_settings["smtp_user_admin"] = $request->smtp_user_admin;
+        if (!empty($request->smtp_password_admin)) {
+            $data_settings["smtp_password_admin"] = $request->smtp_password_admin;
         }
 
         $logs = []; // Buat array kosong untuk menyimpan log
@@ -242,12 +199,6 @@ class SettingController extends Controller
                 $logs[] = $set;
             }
         }
-
-        
-
-        // Setelah perulangan selesai, $logs akan berisi semua log untuk setiap data yang diproses.
-
-
         //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 

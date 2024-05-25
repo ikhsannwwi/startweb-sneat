@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-8" style="padding-right: 0;">
                 <!-- Menggunakan col-8 agar input lebih lebar dan menghapus padding kanan -->
-                <input type="text" class="form-control" value="{{Route::is('admin.users.edit*') ? ($data->user_group ? $data->user_group->name : '') : ''}}" id="inputUserGroupName" readonly>
-                <input type="text" class="d-none" value="{{Route::is('admin.users.edit*') ? ($data->user_group ? $data->user_group->id : '') : ''}}" name="user_group" id="inputUserGroupId">
+                <input type="text" class="form-control" value="{{Route::is('admin.users.edit*') ? ($data->user_group ? $data->user_group->name : 'Moderator') : ''}}" id="inputUserGroupName" readonly>
+                <input type="text" class="d-none" value="{{Route::is('admin.users.edit*') ? ($data->user_group ? $data->user_group->id : 0) : ''}}" name="user_group" id="inputUserGroupId">
             </div>
             <div class="col-4" style="padding-left: 0;">
                 <!-- Menggunakan col-4 agar tombol "Search" lebih kecil dan menghapus padding kiri -->

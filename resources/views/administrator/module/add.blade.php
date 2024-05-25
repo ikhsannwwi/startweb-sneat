@@ -81,7 +81,7 @@
                                                             <label class="form-label">Kode Akses</label>
                                                             <input
                                                                 class="modul_akses-kode_akses-input kode_akses form-control"
-                                                                placeholder="Masukan Kode Akses"
+                                                                placeholder="Masukan Kode Akses" autocomplete="off"
                                                                 name="modul_akses[0][kode_akses]" type="text" />
                                                         </div>
                                                     </div>
@@ -119,7 +119,8 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset_administrator('assets/plugins/parsleyjs/parsley.min.js') }}"></script>
+<script src="{{ asset_administrator('assets/plugins/parsleyjs/parsley.min.js') }}"></script>
+<script src="{{ asset_administrator('assets/plugins/parsleyjs/page/parsley.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -231,30 +232,30 @@
                 }
             });
 
+            function indicatorSubmit() {
+                submitButton.querySelector('.indicator-label').style.display =
+                    'none';
+                submitButton.querySelector('.indicator-progress').style.display =
+                    'inline-block';
+            }
+
+            function indicatorNone() {
+                submitButton.querySelector('.indicator-label').style.display =
+                    'inline-block';
+                submitButton.querySelector('.indicator-progress').style.display =
+                    'none';
+                submitButton.disabled = false;
+            }
+
+            function indicatorBlock() {
+                // Disable the submit button and show the "Please wait..." message
+                submitButton.disabled = true;
+                submitButton.querySelector('.indicator-label').style.display = 'none';
+                submitButton.querySelector('.indicator-progress').style.display =
+                    'inline-block';
+            }
+
         });
-
-        function indicatorSubmit() {
-            submitButton.querySelector('.indicator-label').style.display =
-                'none';
-            submitButton.querySelector('.indicator-progress').style.display =
-                'inline-block';
-        }
-
-        function indicatorNone() {
-            submitButton.querySelector('.indicator-label').style.display =
-                'inline-block';
-            submitButton.querySelector('.indicator-progress').style.display =
-                'none';
-            submitButton.disabled = false;
-        }
-
-        function indicatorBlock() {
-            // Disable the submit button and show the "Please wait..." message
-            submitButton.disabled = true;
-            submitButton.querySelector('.indicator-label').style.display = 'none';
-            submitButton.querySelector('.indicator-progress').style.display =
-                'inline-block';
-        }
 
         function resetData() {
 

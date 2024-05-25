@@ -162,7 +162,8 @@
 
 
 @push('js')
-    <script src="{{ asset_administrator('assets/plugins/parsleyjs/parsley.min.js') }}"></script>
+<script src="{{ asset_administrator('assets/plugins/parsleyjs/parsley.min.js') }}"></script>
+<script src="{{ asset_administrator('assets/plugins/parsleyjs/page/parsley.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {

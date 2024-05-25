@@ -325,11 +325,27 @@ class UserController extends Controller
         ]);
     }
 
-    public function getDataUserGroup(){
-        $data = UserGroup::query();
-
-        return DataTables::of($data)
-            ->make(true);
+    public function getDataUserGroup() {
+        // Fetch data from UserGroup model
+        $datas = UserGroup::select('id', 'name')->get()->toArray();
+    
+        // Initialize $data with $datas
+        $data = $datas;
+    
+        // Check if the authenticated user's user_group_id is 0
+        if (auth()->user()->user_group_id === "0") {
+            // Define moderator details
+            $moderator = [
+                'id' => 0,
+                'name' => 'Moderator'
+            ];
+    
+            // Merge moderator data with existing data
+            $data = array_merge([$moderator], $datas);
+        }
+    
+        // Return data in DataTables format
+        return DataTables::of($data)->make(true);
     }
     
     public function generateKode(){
